@@ -58,7 +58,13 @@ class DefaultStandardToastWidget extends StatelessWidget
         ),
         borderRadius: toastStyle.borderRadius,
         border: Border.fromBorderSide(toastStyle.borderSide),
-        boxShadow: toastStyle.boxShadow,
+        // boxShadow: toastStyle.boxShadow,
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 4, 111, 233),
+            blurRadius: 12,
+          ),
+        ],
       ),
       padding: toastStyle.padding,
       child: Row(
