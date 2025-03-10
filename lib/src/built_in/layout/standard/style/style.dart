@@ -173,6 +173,7 @@ class StandardStyleValues extends Equatable {
     this.descriptionMaxLines,
     this.progressIndicatorStrokeWidth,
     this.progressIndicatorTheme,
+    this.boxShadow,
   });
 
   final MaterialColor? primaryColor;
@@ -181,6 +182,8 @@ class StandardStyleValues extends Equatable {
   final EdgeInsetsGeometry? padding;
   final BorderSide? borderSide;
   final BorderRadiusGeometry? borderRadius;
+
+  final List<BoxShadow>? boxShadow;
 
   final int? titleMaxLines;
   final int? descriptionMaxLines;
@@ -203,6 +206,7 @@ class StandardStyleValues extends Equatable {
         descriptionMaxLines,
         progressIndicatorStrokeWidth,
         progressIndicatorTheme,
+        boxShadow,
       ];
 }
 
