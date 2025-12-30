@@ -25,15 +25,23 @@ class FilledStandardToastStyle extends BaseStandardToastStyle {
   Color get backgroundColor => primaryColor;
 
   @override
-  Color get foregroundColor =>
-      providedValues?.surfaceLight ?? defaults.surfaceLight;
+  Color get foregroundColor {
+    final bg = backgroundColor;
+    final luminance = bg.computeLuminance();
+    // Typical threshold for deciding light vs dark foreground
+    if (luminance > 0.5) {
+      return providedValues?.surfaceDark ?? defaults.surfaceDark;
+    } else {
+      return providedValues?.surfaceLight ?? defaults.surfaceLight;
+    }
+  }
 
   @override
   Color blurredBackgroundColor(bool applyBlur, Color color) =>
       applyBlur ? color.withValues(alpha: 0.8) : color;
 
   @override
-  Color get iconColor => providedValues?.surfaceLight ?? defaults.surfaceLight;
+  Color get iconColor => foregroundColor;
 
   @override
   ProgressIndicatorThemeData get defaultProgressIndicatorTheme =>
