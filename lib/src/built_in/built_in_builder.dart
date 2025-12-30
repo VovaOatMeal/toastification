@@ -16,14 +16,18 @@ class BuiltInBuilder extends StatelessWidget {
     this.title,
     this.description,
     this.primaryColor,
+    this.primaryDarkColor,
     this.backgroundColor,
+    this.backgroundDarkColor,
     this.foregroundColor,
+    this.foregroundDarkColor,
     this.icon,
     this.brightness,
     this.padding,
     this.margin,
     this.borderRadius,
     this.borderSide,
+    this.borderSideDark,
     this.boxShadow,
     this.showProgressBar,
     this.applyBlurEffect,
@@ -50,8 +54,11 @@ class BuiltInBuilder extends StatelessWidget {
   final Widget? icon;
 
   final Color? primaryColor;
+  final Color? primaryDarkColor;
   final Color? backgroundColor;
+  final Color? backgroundDarkColor;
   final Color? foregroundColor;
+  final Color? foregroundDarkColor;
 
   final Brightness? brightness;
 
@@ -61,6 +68,7 @@ class BuiltInBuilder extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
 
   final BorderSide? borderSide;
+  final BorderSide? borderSideDark;
 
   final List<BoxShadow>? boxShadow;
 
@@ -97,8 +105,12 @@ class BuiltInBuilder extends StatelessWidget {
     final dragToClose = this.dragToClose ?? true;
 
     final primaryColor = ColorUtils.convertToMaterialColor(this.primaryColor);
+    final primaryDarkColor =
+        ColorUtils.convertToMaterialColor(this.primaryDarkColor);
     final backgroundColor =
         ColorUtils.convertToMaterialColor(this.backgroundColor);
+    final backgroundDarkColor =
+        ColorUtils.convertToMaterialColor(this.backgroundDarkColor);
 
     return _BuiltInContainer(
       item: item,
@@ -116,14 +128,18 @@ class BuiltInBuilder extends StatelessWidget {
         title: title,
         description: description,
         primaryColor: primaryColor,
+        primaryDarkColor: primaryDarkColor,
         backgroundColor: backgroundColor,
+        backgroundDarkColor: backgroundDarkColor,
         foregroundColor: foregroundColor,
+        foregroundDarkColor: foregroundDarkColor,
         icon: icon,
         showIcon: showIcon,
         brightness: brightness,
         padding: padding,
         borderRadius: borderRadius,
         borderSide: borderSide,
+        borderSideDark: borderSideDark,
         boxShadow: boxShadow,
         onCloseTap: _onCloseButtonTap(),
         showProgressBar: showProgressBar,
@@ -158,13 +174,17 @@ class BuiltInToastBuilder extends StatelessWidget {
     this.title,
     this.description,
     this.primaryColor,
+    this.primaryDarkColor,
     this.backgroundColor,
+    this.backgroundDarkColor,
     this.foregroundColor,
+    this.foregroundDarkColor,
     this.icon,
     this.brightness,
     this.padding,
     this.borderRadius,
     this.borderSide,
+    this.borderSideDark,
     this.boxShadow,
     this.showIcon,
     required this.onCloseTap,
@@ -187,8 +207,11 @@ class BuiltInToastBuilder extends StatelessWidget {
   final Widget? icon;
 
   final Color? primaryColor;
+  final Color? primaryDarkColor;
   final Color? backgroundColor;
+  final Color? backgroundDarkColor;
   final Color? foregroundColor;
+  final Color? foregroundDarkColor;
 
   final Brightness? brightness;
 
@@ -197,6 +220,7 @@ class BuiltInToastBuilder extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
 
   final BorderSide? borderSide;
+  final BorderSide? borderSideDark;
 
   final List<BoxShadow>? boxShadow;
 
@@ -241,11 +265,15 @@ class BuiltInToastBuilder extends StatelessWidget {
         type: effectiveType,
         providedValues: StandardStyleValues(
           primaryColor: primaryColor?.toMaterialColor,
+          primaryDarkColor: primaryDarkColor?.toMaterialColor,
           surfaceLight: backgroundColor,
+          surfaceLightDark: backgroundDarkColor,
           surfaceDark: foregroundColor,
+          surfaceDarkDark: foregroundDarkColor,
           padding: padding,
           borderRadius: borderRadius,
           borderSide: borderSide,
+          borderSideDark: borderSideDark,
           boxShadow: boxShadow,
           progressIndicatorStrokeWidth: progressBarTheme?.linearMinHeight,
           progressIndicatorTheme: progressBarTheme,

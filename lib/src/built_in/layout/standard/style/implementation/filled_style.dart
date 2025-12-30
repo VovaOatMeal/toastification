@@ -10,11 +10,16 @@ class FilledStandardToastStyle extends BaseStandardToastStyle {
   });
 
   @override
-  DefaultStyleValues get defaults => DefaultStyleValues(
-        primaryColor: type.color.toMaterialColor,
-        surfaceLight: Colors.white,
-        surfaceDark: Colors.black,
-      );
+  DefaultStyleValues get defaults {
+    final isDarkMode = flutterTheme?.brightness == Brightness.dark;
+    final effectiveColor =
+        isDarkMode && type.darkColor != null ? type.darkColor! : type.color;
+    return DefaultStyleValues(
+      primaryColor: effectiveColor.toMaterialColor,
+      surfaceLight: Colors.white,
+      surfaceDark: Colors.black,
+    );
+  }
 
   @override
   Color get backgroundColor => primaryColor;

@@ -10,17 +10,37 @@ class FlatStandardColoredToastStyle extends BaseStandardToastStyle {
   });
 
   @override
-  DefaultStyleValues get defaults => DefaultStyleValues(
-        primaryColor: type.color.toMaterialColor,
-        surfaceLight: Colors.white,
-        surfaceDark: Colors.black,
-      );
+  DefaultStyleValues get defaults {
+    final isDarkMode = flutterTheme?.brightness == Brightness.dark;
+    final effectiveColor =
+        isDarkMode && type.darkColor != null ? type.darkColor! : type.color;
+    return DefaultStyleValues(
+      primaryColor: effectiveColor.toMaterialColor,
+      surfaceLight: Colors.white,
+      surfaceDark: Colors.black,
+    );
+  }
 
   @override
-  Color get backgroundColor => primaryColor.shade50;
+  Color get foregroundColor {
+    final isDarkMode = flutterTheme?.brightness == Brightness.dark;
+    return isDarkMode
+        ? defaults.surfaceLight.withValues(alpha: 0.8)
+        : providedValues?.surfaceDark ?? defaults.surfaceDark;
+  }
 
   @override
-  Color get iconColor => providedValues?.surfaceDark ?? defaults.surfaceDark;
+  Color get backgroundColor {
+    final isDarkMode = flutterTheme?.brightness == Brightness.dark;
+    final blendForegroundColor = primaryColor.withValues(alpha: 0.5);
+    final blendBackgroundColor = defaults.surfaceDark;
+    final blendForDarkMode =
+        Color.alphaBlend(blendForegroundColor, blendBackgroundColor);
+    return isDarkMode ? blendForDarkMode : primaryColor.shade100;
+  }
+
+  @override
+  Color get iconColor => foregroundColor;
 
   @override
   BorderSide get borderSide =>

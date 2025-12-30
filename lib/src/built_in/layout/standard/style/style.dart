@@ -28,12 +28,29 @@ abstract class BaseStandardToastStyle extends Equatable {
 
   DefaultStyleValues get defaults;
 
-  MaterialColor get primaryColor =>
-      providedValues?.primaryColor ?? defaults.primaryColor;
-  Color get backgroundColor =>
-      providedValues?.surfaceLight ?? defaults.surfaceLight;
-  Color get foregroundColor =>
-      providedValues?.surfaceDark ?? defaults.surfaceDark;
+  /// Returns true if the current theme is dark mode
+  bool get _isDarkMode => flutterTheme?.brightness == Brightness.dark;
+
+  MaterialColor get primaryColor {
+    if (_isDarkMode && providedValues?.primaryDarkColor != null) {
+      return providedValues!.primaryDarkColor!;
+    }
+    return providedValues?.primaryColor ?? defaults.primaryColor;
+  }
+
+  Color get backgroundColor {
+    if (_isDarkMode && providedValues?.surfaceLightDark != null) {
+      return providedValues!.surfaceLightDark!;
+    }
+    return providedValues?.surfaceLight ?? defaults.surfaceLight;
+  }
+
+  Color get foregroundColor {
+    if (_isDarkMode && providedValues?.surfaceDarkDark != null) {
+      return providedValues!.surfaceDarkDark!;
+    }
+    return providedValues?.surfaceDark ?? defaults.surfaceDark;
+  }
 
   /// Returns a blurred version of the background color
   /// usually add some transparency to the color
@@ -46,8 +63,13 @@ abstract class BaseStandardToastStyle extends Equatable {
   Color get closeIconColor => foregroundColor.withValues(alpha: .4);
 
   EdgeInsetsGeometry get padding => providedValues?.padding ?? defaults.padding;
-  BorderSide get borderSide =>
-      providedValues?.borderSide ?? defaults.borderSide;
+  BorderSide get borderSide {
+    if (_isDarkMode && providedValues?.borderSideDark != null) {
+      return providedValues!.borderSideDark!;
+    }
+    return providedValues?.borderSide ?? defaults.borderSide;
+  }
+
   BorderRadiusGeometry get borderRadius =>
       providedValues?.borderRadius ?? defaults.borderRadius;
 
@@ -178,10 +200,14 @@ class DefaultStyleValues extends StandardStyleValues {
 class StandardStyleValues extends Equatable {
   const StandardStyleValues({
     this.primaryColor,
+    this.primaryDarkColor,
     this.surfaceLight,
     this.surfaceDark,
+    this.surfaceLightDark,
+    this.surfaceDarkDark,
     this.padding,
     this.borderSide,
+    this.borderSideDark,
     this.borderRadius,
     this.boxShadow,
     this.titleMaxLines,
@@ -192,10 +218,14 @@ class StandardStyleValues extends Equatable {
   });
 
   final MaterialColor? primaryColor;
+  final MaterialColor? primaryDarkColor;
   final Color? surfaceLight;
   final Color? surfaceDark;
+  final Color? surfaceLightDark;
+  final Color? surfaceDarkDark;
   final EdgeInsetsGeometry? padding;
   final BorderSide? borderSide;
+  final BorderSide? borderSideDark;
   final BorderRadiusGeometry? borderRadius;
   final List<BoxShadow>? boxShadow;
   final int? titleMaxLines;
@@ -211,10 +241,14 @@ class StandardStyleValues extends Equatable {
   @override
   List<Object?> get props => [
         primaryColor,
+        primaryDarkColor,
         surfaceLight,
         surfaceDark,
+        surfaceLightDark,
+        surfaceDarkDark,
         padding,
         borderSide,
+        borderSideDark,
         borderRadius,
         boxShadow,
         titleMaxLines,

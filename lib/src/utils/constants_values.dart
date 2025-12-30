@@ -11,6 +11,12 @@ const warningColor = Color(0xFFFFB600);
 /// default color for error toastification
 const errorColor = Color(0xFFFF3A30);
 
+// Dark theme color constants
+const infoDarkColor = Color(0xFF002846);
+const successDarkColor = Color(0xFF0B290B);
+const warningDarkColor = Color(0xFF372700);
+const errorDarkColor = Color(0xFF400300);
+
 const lowModeShadow = [
   BoxShadow(
     color: Color(0x07000000),
